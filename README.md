@@ -1,5 +1,6 @@
 ## dream2abatet
-MATLAB script to write ABAQUS tetrahedral mesh from Dream.3D surface mesh
+
+MATLAB script to write ABAQUS tetrahedral (C3D4) mesh from Dream.3D surface mesh
 
 The script
 
@@ -35,13 +36,14 @@ dream2abatet('ex_nodes.in','ex_tri.in','ex_features.csv',0.75,0.5,true)
 
 in MATLAB and you should get a file dream.inp containing your mesh. Check it in ABAQUS/CAE setting coloring according to Sets. It should look like the image above.
 
-The repository also contains an example Dream.3D (ver. 4.2.5) pipeline - `ex_pipe.txt`, which writes the `ex_nodes.in`, `ex_tri.in`, `ex_features.csv` files for a 32x32x32 single-phase microstructure grid .
+The repository also contains an example Dream.3D (ver. 4.2.5) pipeline - `ex_pipe.txt`, which writes the `ex_nodes.in`, `ex_tri.in`, `ex_features.csv` files for a 32x32x32 single-phase microstructure grid.
 
 ## Known issues
 
 1. The script requires grain centroids. The only option to export centroids in Dream.3D ver. 4.2.x seems to be Write Goal Attributes in _Pack Primary Phases_ filter. Since the generated microstructure does not necessarily match the goal attributes exactly, some grains may be missing in ABAQUS sets.
-2. Generation of volume mesh may fail for some microstructures (Invalid PLC error). In such cases, rerun Dream.3D pipeline and try again or try different Dream.3D settings.
-3. No information on phases will be passed to ABAQUS in the current version of the script.
+2. Setting periodic boundaries in Dream.3D is not recommended: either generation of volume mesh will fail or the number of missing grains in ABAQUS sets will increase.
+3. Generation of volume mesh may fail for some microstructures (Invalid PLC error). In such cases, rerun Dream.3D pipeline and try again or try different Dream.3D settings.
+4. No information on phases will be passed to ABAQUS in the current version of the script.
 
 ## Acknowledgment
 
