@@ -26,9 +26,9 @@ This repository contains example files:
 - ex_features.in
 
 You can use them to generate your first mesh:
+
 1. Download the repo, extract the files to a MATLAB folder.
 2. Run
-
 ```
 dream2abatet('ex_nodes.in','ex_tri.in','ex_features.csv',0.75,0.5,true)
 ```
