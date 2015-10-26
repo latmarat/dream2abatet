@@ -120,15 +120,15 @@ function [nodes,elem] = dream2abatet(nodeFile,triFile,featureFile,keepRatio,maxV
         fprintf(inpFile,'*Part, name=DREAMTET\n'); 
 
         % write nodes
-        indn = 1:size(nodes,1);
-        abanodes = [indn', nodes];
+        nlabels = 1:size(nodes,1);
+        abanodes = [nlabels', nodes];
         fprintf(inpFile,'*NODE, NSET=AllNodes\n');
         fprintf(inpFile,'%d,\t%e,\t%e, \t%e\n',abanodes');
 
         % write elements
         conn = elem(:,1:4);
-        inde = 1:size(elem,1);
-        abaelem = [inde' conn];
+        elabels = 1:size(elem,1);
+        abaelem = [elabels' conn];
         fprintf(inpFile,'*Element, type=C3D4, ELSET=AllElements\n');
         fprintf(inpFile,'%d,\t%d,\t%d,\t%d,\t%d\n',abaelem');
 
@@ -140,7 +140,7 @@ function [nodes,elem] = dream2abatet(nodeFile,triFile,featureFile,keepRatio,maxV
                 fprintf('WARNING! Set Grain-%d is empty\n', ii);
             else
                 fprintf(inpFile,'\n*Elset, elset=Grain-%d\n',ii);
-                fprintf(inpFile,'%d, %d, %d, %d, %d, %d, %d, %d, %d\n',abaelem(grains==ii)');
+                fprintf(inpFile,'%d, %d, %d, %d, %d, %d, %d, %d, %d\n',elabels(grains==ii)');
             end
         end
 
@@ -149,7 +149,7 @@ function [nodes,elem] = dream2abatet(nodeFile,triFile,featureFile,keepRatio,maxV
         fclose(inpFile);  
         
     end
-    
+        
     % display messages
     fprintf('***dream2abatet.m completed***\n');
     if abaMeshFlag
@@ -157,4 +157,5 @@ function [nodes,elem] = dream2abatet(nodeFile,triFile,featureFile,keepRatio,maxV
     end
     fprintf('Mean quality of the mesh: %.2f\n', meanQ) 
     toc
+    
 end
